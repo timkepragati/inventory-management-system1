@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management System</title>
+</head>
+<body>
+    <h1>Inventory</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+        {% for item in inventory %}
+        <tr>
+            <td>{{ item[0] }}</td>
+            <td>{{ item[1] }}</td>
+            <td>{{ item[2] }}</td>
+            <td>{{ item[3] }}</td>
+            <td>{{ item[4] }}</td>
+            <td>{{ item[5] }}</td>
+            <td><a href="{{ url_for('update', id=item[0]) }}">Update</a> | <a href="{{ url_for('delete', id=item[0]) }}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Add Product</h2>
+    <form method="post" action="{{ url_for('add') }}">
+        <label for="productname">Product Name:</label>
+        <input type="text" name="productname" required>
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="quantity" required>
+        <label for="price">Price:</label>
+        <input type="number" name="price" step="0.01" required>
+        <button type="submit">Add Product</button>
+    </form>
+
+    <h2>Search Product</h2>
+    <form method="post" action="{{ url_for('search') }}">
+        <label for="keyword">Keyword:</label>
+        <input type="text" name="keyword" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+</body>
+</html>

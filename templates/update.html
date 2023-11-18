@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Product</title>
+</head>
+<body>
+    <h2>Update Product</h2>
+    <form method="post" action="{{ url_for('update', id=item[0]) }}">
+        <label for="new_quantity">New Quantity:</label>
+        <input type="number" name="new_quantity" value="{{ item[2] }}" required>
+        <button type="submit">Update Product</button>
+    </form></body>
+</html>
